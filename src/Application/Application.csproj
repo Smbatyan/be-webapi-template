@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,18 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 
+
   <ItemGroup>
-    <Folder Include="Abstractions\Data\" />
-    <Folder Include="Abstractions\Email\" />
-    <Folder Include="Abstractions\Messaging\" />
-    <Folder Include="Behaviors\" />
-    <Folder Include="Contracts\" />
-    <Folder Include="Entity1\Commands\" />
-    <Folder Include="Entity1\Events\" />
-    <Folder Include="Entity1\Queries\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

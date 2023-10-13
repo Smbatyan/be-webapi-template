@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/template",
+  "author": "PandaTech team",
+  "description": "PandaTech API template",
+  "classifications": [ "Web" ],
+  "identity": "Panda.WebApi",
+  "name": "Custom ASP.NET Core Web Api",
+  "shortName": "panda-wab-api",
+  "sourceName": "WebApi",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  }
+}

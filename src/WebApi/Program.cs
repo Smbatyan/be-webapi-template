@@ -1,31 +1,30 @@
 using Application;
 using Infrastructure;
-using Presentation;
-using Serilog;
+using Microsoft.FeatureManagement;
+using WebApi.Extensions;
+using WebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.AddSerilog(); // Move to common
+builder.AddCors(); // Move to common
 
 builder.Services
+    .AddEndpointsApiExplorer()
+    .AddPandaSwaggerGen(builder.Configuration) // Move to common
+    .AddCustomFluentValidation()
+    .AddAppSettings(builder.Configuration)
     .AddApplication()
-    .AddInfrastructure()
-    .AddPresentation();
-
-builder.Host.UseSerilog((context, configuration) => 
-    configuration.ReadFrom.Configuration(context.Configuration));
+    .AddInfrastructure(builder.Configuration)
+    .AddApiVersioningFromHeader()
+    .AddEndpointsApiExplorer()
+    .AddFeatureManagement().Services
+    .AddControllers();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseSerilogRequestLogging();
-
+app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseHttpsRedirection();
+app.UsePandaSwagger(builder.Configuration);
 
 app.Run();
